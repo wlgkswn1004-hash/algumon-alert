@@ -1,0 +1,17 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          for u in \
+            "https://www.ppomppu.co.kr/rss.php?id=ppomppu" \
+            "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu" \
+            "https://www.algumon.com/n/deal" \
+            "https://www.clien.net/service/board/jirum" \
+            "https://bbs.ruliweb.com/market/board/1020" \
+            "https://quasarzone.com/bbs/qb_saleinfo" \
+            "https://www.dealbada.com/bbs/board.php?bo_table=deal_domestic"; do
+            echo "$(curl -s -o /dev/null -m 20 -w '%{http_code}' -A 'Mozilla/5.0' "$u") $u"
+          done
